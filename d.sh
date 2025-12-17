@@ -23,7 +23,7 @@ MediaUnlockTest_DisneyPlus() {
 
   local refreshToken=$(sed 's/.*"refresh_token":[ ]*"\([^"]\+\)".*/\1/' <<< "$TokenContent")
 
-  local disneycontent=$(sed "s/ILOVEDISNEY/${refreshToken}/g" <<< "$Media_Cookie")
+  local disneycontent=$(sed "s/ILOVEDISNEY/${refreshToken}/g" <<< "$fakecontent")
 
   # ========= 4. 使用token获取用户区域信息 =========
   local tmpresult=$(curl --user-agent "${UA_Browser}" -X POST -sSL --max-time 10 "https://disney.api.edge.bamgrid.com/graph/v1/device/graphql" -H "authorization: ZGlzbmV5JmJyb3dzZXImMS4wLjA.Cu56AgSfBTDag5NiRA81oLHkDZfu5L3CKadnefEAY84" -d "$disneycontent" 2>&1)
